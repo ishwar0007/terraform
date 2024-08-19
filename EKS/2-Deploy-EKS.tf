@@ -20,7 +20,7 @@ module "eks" {
   cluster_name    = var.EKS-Name
   cluster_version = "1.30"
 
-  cluster_endpoint_public_access           = true
+  cluster_endpoint_public_access  = true
   enable_cluster_creator_admin_permissions = true
 
   vpc_id     = data.aws_vpc.default.id
