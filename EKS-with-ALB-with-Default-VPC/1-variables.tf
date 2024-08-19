@@ -13,7 +13,6 @@ variable "AWS-Secret-Key" {
 variable "EKS-Name" {
   default = "Hunter-EKS"
 }
-EKS-Version
 
 variable "EKS-Version" {
   default = "1.30"
