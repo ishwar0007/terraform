@@ -1,11 +1,31 @@
 # EKS-with-ALB-with-New-VPC-with-Fargate
-Terraform deployment may fails at helm section, Redeploy the terraform deployment
 
-After Successful Terraform deployment, Install AWS Cli, kubectl and configure them. After that, run the following command as per your EKS Cluster name.
-aws eks update-kubeconfig --name Hunter-EKS --region ap-south-1
+Execute the following command to create the structure using Terraform.
+
+```bash
+terraform init
+terraform plan
+terraform apply --auto-approve
+```
+
+The Terraform deployment might fail at the Helm section. Redeploy it using the following command.
+
+```bash
+terraform apply --auto-approve
+```
+
+After successfully deploying with Terraform, install the AWS CLI and kubectl, then configure them. Once configured, run the following command using your EKS cluster name.
+
+```bash
+aws eks update-kubeconfig --name EKS-CLUSTER-NAME --region ap-south-1
 kubectl rollout restart deployment coredns -n kube-system
+```
 
-To Delete
+To delete the structure created by Terraform.
+
+```bash
 terraform destroy --auto-approve
+```
 
-When you are deleting the terraform resources at that time make sure to manaully delete the loadbalancer associated to the EKS. In some cases terraform will not be able to delete VPC created for EKS, then you need to manually delete the VPC.
+## Note :-
+When deleting Terraform resources, ensure to manually delete the load balancer associated with the EKS cluster. In some cases, Terraform may not be able to delete the VPC created for EKS, so you may need to manually delete the VPC as well.
