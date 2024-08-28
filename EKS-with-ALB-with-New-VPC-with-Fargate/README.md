@@ -44,6 +44,13 @@ After successfully deploying with Terraform, Run the following command with your
 aws eks update-kubeconfig --name EKS-CLUSTER-NAME --region ap-south-1
 kubectl rollout restart deployment coredns -n kube-system
 ```
+
+Now deploy a simple nginx docker image in Kuberntes.
+
+```bash
+kubectl apply -f demo-deployment.yaml
+```
+
 ## Destroy the structure with Terraform
 
 To delete the structure created by Terraform.
