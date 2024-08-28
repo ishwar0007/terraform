@@ -1,5 +1,29 @@
 # EKS-with-ALB-with-New-VPC-with-Fargate
 
+## Prerequisite
+First, install the AWS CLI and kubectl command. Then, configure the AWS CLI with your access and secret keys.
+
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+```
+
+```bash
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+mv kubectl /usr/bin/
+kubectl version --client
+```
+
+To configure the AWS CLI, run the following command.
+
+```bash
+aws configure
+```
+
+## Configure the structure with Terraform
 Execute the following command to create the structure using Terraform.
 
 ```bash
@@ -14,12 +38,13 @@ The Terraform deployment might fail at the Helm section. Redeploy it using the f
 terraform apply --auto-approve
 ```
 
-After successfully deploying with Terraform, install the AWS CLI and kubectl, then configure them. Once configured, run the following command using your EKS cluster name.
+After successfully deploying with Terraform, Run the following command with your EKS cluster name to configure the kubectl and restart the deployment.
 
 ```bash
 aws eks update-kubeconfig --name EKS-CLUSTER-NAME --region ap-south-1
 kubectl rollout restart deployment coredns -n kube-system
 ```
+## Destroy the structure with Terraform
 
 To delete the structure created by Terraform.
 
