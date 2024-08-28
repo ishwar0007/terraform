@@ -53,6 +53,11 @@ kubectl apply -f demo-deployment.yaml
 
 ## Destroy the structure with Terraform
 
+First delete the demo deployment which we have deployed in the above commands.
+```bash
+kubectl delete -f demo-deployment.yaml
+```
+
 To delete the structure created by Terraform.
 
 ```bash
@@ -60,4 +65,4 @@ terraform destroy --auto-approve
 ```
 
 ## Note :-
-When deleting Terraform resources, ensure to manually delete the load balancer associated with the EKS cluster. In some cases, Terraform may not be able to delete the VPC created for EKS, so you may need to manually delete the VPC as well.
+Before executing the `terraform destroy` command, ensure that all deployments and ingress resources are deleted. If these resources are not removed beforehand, the Application Load Balancer (ALB) connected to the EKS cluster may fail to delete, potentially leading to errors during the VPC deletion process in `terraform destroy`. In such cases, you would need to manually delete the ALB and VPC to resolve the issue.
